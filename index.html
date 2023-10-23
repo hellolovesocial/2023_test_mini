@@ -76,7 +76,7 @@
     <p>LIFFの作成を色々と試すためのページです。</p>
      <img id="profile_img" class="profile" src=""/>
     <h2 id="profile_name"></h2>
-    <button class="btn" id="shareFriends">share to friends</button><br>
+    <button class="btn" id="shareTargetPicker">share to friends</button><br>
   </body>
    
   <script>
@@ -107,23 +107,31 @@
 // コールバックを使用する方法
 liff.init({ liffId: "123456-abcedfg" }, successCallback, errorCallback);
 
-
-    function shareFriends() {
-      if (liff.isApiAvailable('shareTargetPicker')){
-        liff.shareTargetPicker(
-          [{
-            type: 'text',
-            text: 'https://liff.line.me/1654391458-ZXkyBBy8'
-          }]
-        ).then(function() {
-        }).catch(function(error) {
-          window.alert('シェア機能でエラーが起こりました：'+ error);
-        });
-      };
+liff
+  .shareTargetPicker(
+    [
+      {
+        type: "text",
+        text: "2023年勉強会です！Hello, World!",
+      },
+    ],
+    {
+      isMultiple: true,
     }
-     
-    document.querySelector("#shareFriends").addEventListener("click", shareFriends)
-
+  )
+  .then(function (res) {
+    if (res) {
+      // succeeded in sending a message through TargetPicker
+      console.log(`[${res.status}] Message sent!`);
+    } else {
+      // sending message canceled
+      console.log("TargetPicker was closed!");
+    }
+  })
+  .catch(function (error) {
+    // something went wrong before sending a message
+    console.log("something wrong happen");
+  });
     
   </script>
    
