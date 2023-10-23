@@ -106,15 +106,25 @@
 
 // コールバックを使用する方法
 liff.init({ liffId: "123456-abcedfg" }, successCallback, errorCallback);
- 
- if (liff.isApiAvailable('shareTargetPicker')) {
-    liff.shareTargetPicker([
-        {
+
+
+    function shareFriends() {
+      if (liff.isApiAvailable('shareTargetPicker')){
+        liff.shareTargetPicker(
+          [{
             type: 'text',
-            text: 'こんにちは！今日は2023年の秋の勉強会です！Hello, World!',
-        },
-    ]);
-}
+            text: 'https://liff.line.me/1654391458-ZXkyBBy8'
+          }]
+        ).then(function() {
+        }).catch(function(error) {
+          window.alert('シェア機能でエラーが起こりました：'+ error);
+        });
+      };
+    }
+     
+    document.querySelector("#shareFriends").addEventListener("click", shareFriends)
+
+    
   </script>
    
 </html>
