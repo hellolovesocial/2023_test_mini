@@ -76,6 +76,7 @@
     <p>LIFFの作成を色々と試すためのページです。</p>
      <img id="profile_img" class="profile" src=""/>
     <h2 id="profile_name"></h2>
+    <button class="btn" id="shareFriends">share to friends</button><br>
   </body>
    
   <script>
@@ -83,13 +84,6 @@
     const Name = document.getElementById('profile_name');
     const Img = document.getElementById("profile_img");
  
-    // liff.init({liffId}).then(() => {
-    //   if (liff.isLoggedIn()) {
-    //   }
-    //   else{
-    //     liff.login();
-    //   }
-    // })
 
     liff
   .init({
@@ -113,7 +107,14 @@
 // コールバックを使用する方法
 liff.init({ liffId: "123456-abcedfg" }, successCallback, errorCallback);
  
- 
+ if (liff.isApiAvailable('shareTargetPicker')) {
+    liff.shareTargetPicker([
+        {
+            type: 'text',
+            text: 'こんにちは！今日は2023年の秋の勉強会です！Hello, World!',
+        },
+    ]);
+}
   </script>
    
 </html>
