@@ -76,7 +76,7 @@
     <p>LIFFの作成を色々と試すためのページです。</p>
      <img id="profile_img" class="profile" src=""/>
     <h2 id="profile_name"></h2>
-    <button class="btn" id="shareTargetPicker">share to friends</button><br>
+<!--     <button class="btn" id="shareTargetPicker">share to friends</button><br> -->
   </body>
    
   <script>
@@ -98,16 +98,7 @@
             Name.innerHTML = name;
             Img.src = pic;
           })
-  })
-  .catch((err) => {
-    // Error happens during initialization
-    console.log(err.code, err.message);
-  });
-
-// コールバックを使用する方法
-liff.init({ liffId: "123456-abcedfg" }, successCallback, errorCallback);
-
-liff
+    liff
   .shareTargetPicker(
     [
       {
@@ -132,6 +123,41 @@ liff
     // something went wrong before sending a message
     console.log("something wrong happen");
   });
+    
+  })
+  .catch((err) => {
+    // Error happens during initialization
+    console.log(err.code, err.message);
+  });
+
+// コールバックを使用する方法
+liff.init({ liffId: "123456-abcedfg" }, successCallback, errorCallback);
+
+// liff
+//   .shareTargetPicker(
+//     [
+//       {
+//         type: "text",
+//         text: "2023年勉強会です！Hello, World!",
+//       },
+//     ],
+//     {
+//       isMultiple: true,
+//     }
+//   )
+//   .then(function (res) {
+//     if (res) {
+//       // succeeded in sending a message through TargetPicker
+//       console.log(`[${res.status}] Message sent!`);
+//     } else {
+//       // sending message canceled
+//       console.log("TargetPicker was closed!");
+//     }
+//   })
+//   .catch(function (error) {
+//     // something went wrong before sending a message
+//     console.log("something wrong happen");
+//   });
     
   </script>
    
