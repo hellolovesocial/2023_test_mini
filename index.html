@@ -72,9 +72,10 @@
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   </head>
   <body>
-    <img src="purple_sky.JPG">
     <h1>LIFFテストページ</h1>
     <p>LIFFの作成を色々と試すためのページです。</p>
+     <img id="profile_img" class="profile" src=""/>
+    <h2 id="profile_name"></h2>
   </body>
    
   <script>
@@ -82,13 +83,35 @@
     const Name = document.getElementById('profile_name');
     const Img = document.getElementById("profile_img");
  
-    liff.init({liffId}).then(() => {
-      if (liff.isLoggedIn()) {
-      }
-      else{
-        liff.login();
-      }
-    })
+    // liff.init({liffId}).then(() => {
+    //   if (liff.isLoggedIn()) {
+    //   }
+    //   else{
+    //     liff.login();
+    //   }
+    // })
+
+    liff
+  .init({
+    liffId: "1655455441-ANkjZM8E", // Use own liffId
+  })
+  .then(() => {
+    // Start to use liff's api
+    liff.getProfile()
+          .then(profile => {
+            const name = profile.displayName;
+            const pic = profile.pictureUrl;
+            Name.innerHTML = name;
+            Img.src = pic;
+          })
+  })
+  .catch((err) => {
+    // Error happens during initialization
+    console.log(err.code, err.message);
+  });
+
+// コールバックを使用する方法
+liff.init({ liffId: "123456-abcedfg" }, successCallback, errorCallback);
  
  
   </script>
